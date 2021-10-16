@@ -1,0 +1,40 @@
+#header {
+	background-image: url('../../images/florist.jpg');
+	text-align: center;
+	color: #fff;
+	background-position: center;
+	background-size: cover;
+	padding: 3vh;
+    height: 43vh;
+}
+h1{
+    text-align: left;
+}
+
+#center_header > div{
+    display: flex;
+    justify-content: center;
+}
+.div_button {
+    display: flex;
+    justify-content: end;
+}
+
+#header img{
+    width: 50px;
+    margin: 1vh;
+}
+li{
+    list-style-type: none;
+    
+}
+a{
+    text-decoration: none;
+}
+
+@media (max-width: 556px){
+    #header{
+        height: 50vh;
+    }
+
+}

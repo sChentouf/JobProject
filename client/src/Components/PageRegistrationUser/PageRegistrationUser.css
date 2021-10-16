@@ -1,0 +1,9 @@
+@media (min-width: 900px){
+    #cont_login {
+        display: flex;
+        justify-content: center;
+    }
+    #cont_login > div{
+        padding: 2vh;
+    }
+}

@@ -1,0 +1,73 @@
+/*saut de ligne*/
+.saut{
+    margin-bottom: 3vh;
+}
+
+/*div parente */
+
+#content_user_account h3 {
+	color: #fff;
+	background-color: #0B005D;
+	padding: 1vh;
+	margin: 3vh;
+}
+/*coter infos user */
+
+
+#info_user > div{
+    text-align: center;
+    padding: 4vh;
+}
+
+#content_user_account button {
+	background-color: transparent;
+	color: #0B005D;
+	padding: 0.5vh;
+	margin: 0.2vh;
+	border: solid 1px #0B005D;
+	cursor: pointer;
+	border-radius: 3px;
+	margin-left: 7vh;
+}
+
+#content_user_account button:hover{
+    color: #391FFF;
+    border: 1px solid #391FFF;
+	transition: 0.4s;
+}
+
+#info_user img{
+    width: 80px;
+}
+
+/*coter candidate user */
+
+
+
+#candidacy_user li{
+	padding: 3vh;
+}
+
+@media (min-width: 750px){
+    #content_user_account{
+        display: flex;
+        justify-content: center;
+        
+    }
+    #info_user{
+        width: 50vw;
+    }
+    #candidacy_user{
+        width: 50vw;
+    }
+    
+    }
+    @media (max-width: 750px){
+        #info_user{
+            width: 100vw;
+        }
+        #candidacy_user{
+            width: 100vw;
+        }
+        
+    }

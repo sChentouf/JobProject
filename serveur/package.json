@@ -1,0 +1,33 @@
+{
+  "name": "projetjobboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "watch": "nodemon index.js",
+    "client": "cd client && npm start",
+    "build": "cd client && npm build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "email-validator": "^2.0.4",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.13",
+    "path": "^0.12.7",
+    "pipeline": "^0.1.3",
+    "promisify": "^0.0.3",
+    "react-scripts": "^4.0.3",
+    "sequelize": "^6.6.5",
+    "validator": "^13.6.0"
+  }
+}

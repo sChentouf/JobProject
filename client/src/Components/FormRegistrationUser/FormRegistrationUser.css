@@ -1,0 +1,78 @@
+@media (max-width: 900px){
+    #registration,
+    #login,
+    #apply,
+    #registrationBuis{
+        width:50vw;
+        margin:0 auto;
+        margin-top:10%;
+    }
+    #form_registration,
+    #Form_login,
+    #Form_apply,
+    #form_registrationBuis{
+        padding: 6vh;
+    }
+}
+
+    #registration,
+    #login,
+    #apply,
+    #registrationBuis  {
+    width:40vw;
+    margin:0 auto;
+    margin-top:10%;
+}
+
+
+/* Bordered form */
+#form_registration,
+#Form_login,
+#Form_apply,
+#form_registrationBuis{
+    padding: 4vh;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+/* Full-width inputs */
+input[type=text], 
+input[type=password], 
+input[type=email], 
+input[type=number],
+input[type=file],
+ input[type=image], 
+ input[type=radio],
+input[type=tel],
+ input[type=date],
+ input[type=numeric],
+ input[type=textarea],
+ select
+  {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+
+.button_form{
+    background-color: #0B005D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button_form:hover {
+    background-color: white;
+    color: #0B005D;
+    border: 1px solid #0B005D;
+    transition: 0.4s;
+}

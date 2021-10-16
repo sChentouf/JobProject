@@ -1,0 +1,19 @@
+#search {
+	margin: 3vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+#search > div{
+	display: flex;
+}
+  
+#search input[type="text"] {
+	padding: 1vh;
+	margin-top: 1vh;
+	margin-right: 1vh;
+	border: solid 1px #CFDBD5;
+	font-size: 15px;
+}

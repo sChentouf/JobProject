@@ -1,0 +1,12 @@
+#contenant_annouc{
+    display: flex;
+    justify-content: center;
+}
+
+#Annoucem{
+    padding: 5vh;
+    margin: 10vh;
+    text-align: left;
+    border: solid 3px #CFDBD5;
+    width: 50vw;
+}
