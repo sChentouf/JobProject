@@ -41,7 +41,7 @@ const BuisnessAccount = (props) => {
     password: "",
   });
  
-
+//RECUPERE LES INFOS
   useEffect(() => {
    const localtoken = localStorage.getItem("myJWT");
     const decoded = jwt.verify(localtoken, "secret");
@@ -55,6 +55,7 @@ const BuisnessAccount = (props) => {
       });
   }, [props]);
   console.log("response");
+  
 
 
   const handleChange = (e) => {
@@ -91,10 +92,6 @@ const BuisnessAccount = (props) => {
           console.log(response);
         });
   };
-
-
-
-
   return (
     <div>
       <div id="content_user_account">

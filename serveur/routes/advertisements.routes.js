@@ -35,7 +35,7 @@ module.exports = (app) => {
   app.post("/advertisements/:advertisementsId", (req, res) =>
     advertisements.update(req, res)
   );
-  //Select un candidat par l'id
+  //Select un advertisements par l'id
   app.get("/advertisements/:advertisementsId", (req, res) =>
     advertisements.findOne(req, res)
   );

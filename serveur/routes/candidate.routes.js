@@ -7,7 +7,7 @@ module.exports = (app) => {
   app.delete("/candidate", (req, res) => candidate.deleteAll(req, res));
   //Créer registration
   app.post("/register", (req, res) => candidate.create(req, res));
-  //login 
+  //login
   app.post("/login", (req, res) => candidate.login(req, res));
 
   //Select un candidat par l'id
@@ -17,5 +17,7 @@ module.exports = (app) => {
   app.post("/candidate/:candidateId", (req, res) => candidate.update(req, res));
 
   // Supprimer un candidat parId
-  app.delete("/candidate/:candidateId", (req, res) => candidate.delete(req, res) );
+  app.delete("/candidate/:candidateId", (req, res) =>
+    candidate.delete(req, res)
+  );
 };

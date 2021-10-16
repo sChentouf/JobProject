@@ -4,9 +4,12 @@ import React, { useEffect, useState } from "react";
 import "./SuperAdmin.css";
 import FormRegistrationUser from "../FormRegistrationUser/FormRegistrationUser";
 import FormRegistrationBuisness from "../FormRegistrationBuisness/FormRegistrationBuisness";
+import CreateAnnoucement from "../CreateAnnoucement/CreateAnnoucement";
+import FormApply from "../FormApply/FormApply";
 import ItemUser from "../SuperAdmin/ItemUser";
 import ItemBuisness from "../SuperAdmin/ItemBuisness";
 import ItemAdvertisments from "../SuperAdmin/ItemAdvertisments";
+import ItemApplied from "../SuperAdmin/ItemApplied";
 
 
 const SuperAdmin = (props) => {
@@ -20,7 +23,11 @@ const SuperAdmin = (props) => {
     const [dataAdvert, setdataAdvert] = useState();
     const [tabAdvert, setTabAdvert] = useState(false);
 
+    const [dataApplied, setdataApplied] = useState();
+    const [tabApplied, setTabApplied] = useState(false);
+
     // RECUPERER LES VALEURS
+
     function getDataUser() {
         axios.get("http://localhost:8082/candidate/")
             .then((res) => {
@@ -48,21 +55,25 @@ const SuperAdmin = (props) => {
     }
 
     function getDataApplied() {
-        const promise = axios.get("http://localhost:8082/applied/")
-        const data = promise.then((reponse) => reponse.data)
-        console.log()
-
+        axios.get("http://localhost:8082/applied/")
+        .then((res) => {
+            console.log(res.data)
+            setdataApplied(res.data);
+        })
+        setTabApplied(!tabApplied)
     }
 
     // AFFICHER LES TABLEAU AU CLICK 
   
     const [formCreateUser, setformCreateUser] = useState(false);
     const [formCreateBuisness, setformCreateBuisness] = useState(false);
+    const [formCreateAdvert, setformCreateAdvert] = useState(false);
+    const [formCreateApplied, setformCreateApplied] = useState(false);
 
 
    
   
-    const [tabApplied, setTabApplied] = useState(false);
+    
 
     return (
 
@@ -77,7 +88,6 @@ const SuperAdmin = (props) => {
                     {formCreateUser && <FormRegistrationUser />}
                     {dataUser
                      && dataUser.map((user) => <ItemUser user={user} />)}
-                
                 </div>
                 {/* BUISNESS  */}
                 <div>
@@ -92,6 +102,8 @@ const SuperAdmin = (props) => {
                 <div>
                     <h2>Advertisements</h2>
                     <button onClick={e => getDataAdvert()}>get Advertisements</button>
+                    <button onClick={() => setformCreateAdvert(!formCreateAdvert)}>create advertisement</button>
+                    {formCreateAdvert && <CreateAnnoucement />}
                     {dataAdvert
                      && dataAdvert.map((advertisement) => <ItemAdvertisments advertisement={advertisement} />)}
                 </div>
@@ -99,12 +111,15 @@ const SuperAdmin = (props) => {
                 <div>
                     <h2>Applied</h2>
                     <button onClick={e => getDataApplied()}>get Applied</button>
-                    {tabApplied &&
-                        <div><p>fffffffnc</p></div>
-                    }
+                    <button onClick={() => setformCreateApplied(!formCreateApplied)}>create Applied</button>
+                    {formCreateApplied && <FormApply />}
+                    {dataApplied
+                     && dataApplied.map((applied) => <ItemApplied applied={applied} />)}
+                 </div>
+                    
                 </div>
             </div>
-        </div>
+        
     )
 }
 

@@ -1,46 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import validate from "validator";
+//import validate from "validator";
+import jwt from "jsonwebtoken";
 import ".././FormRegistrationUser/FormRegistrationUser.css";
 
 const FormApply = (props) => {
-  const [nameApl, setNameApl] = useState("");
-  const [firstNameApl, setfirstNameApl] = useState("");
-  const [emailApl, setemailApl] = useState("");
-  const [phoneApl, setphoneApl] = useState("");
+  const [userData, setUserData] = useState({
+    name: "",
+    first_name: "",
+    email: "",
+    phone: "",
+    motivation_people: "",
+  });
   const [motivationApl, setMotivationApl] = useState("");
   const [idAdv] = useState(props.idAdv);
 
-  const goApply = (props) => {
-    // CREATE CANDIDAT
-    if (!validate.isEmail(emailApl)) {
-    } else
-      axios
-        .post("http://localhost:8082/applied", {
-          name: nameApl,
-          first_name: firstNameApl,
-          email: emailApl,
-          phone: phoneApl,
-          motivation_people: motivationApl,
-          idAdv: idAdv,
-        })
-        .then((response) => {
-          console.log(response);
-        });
+  useEffect(() => {
+    const localtoken = localStorage.getItem("myJWT");
+    const decoded = jwt.verify(localtoken, "secret");
+    axios
+      .get("http://localhost:8082/candidate/" + decoded.id)
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          setUserData(response.data);
+        }
+      });
+  }, [props]);
+  console.log("response");
+
+  const goApplyUserCo = (props) => {
+    const localtoken = localStorage.getItem("myJWT");
+    const decoded = jwt.verify(localtoken, "secret");
+    console.log("le miiiiiiiiiiiiiien " + decoded.id);
+    axios
+      .post("http://localhost:8082/applieduser" + decoded.id, {
+        // name: userData.name,
+        // first_name: userData.first_name,
+        // email: userData.email,
+        // phone: userData.phone,
+        motivation_people: motivationApl,
+        idAdv: idAdv,
+        id: decoded.id,
+      })
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (
     <div id="apply">
       <form id="Form_apply">
-        <button>X</button><br />
+        <button>X</button>
+        <br />
         <label>
           <b>Name</b>
         </label>
         <input
           type="text"
-          onChange={(e) => {
-            setNameApl(e.target.value);
-          }}
+          value={userData.name}
           placeholder="Enter your Name"
           name="name"
           required
@@ -50,9 +68,7 @@ const FormApply = (props) => {
         </label>
         <input
           type="text"
-          onChange={(e) => {
-            setfirstNameApl(e.target.value);
-          }}
+          value={userData.first_name}
           placeholder="Enter your FirstName"
           name="FirstName"
           required
@@ -62,9 +78,7 @@ const FormApply = (props) => {
         </label>
         <input
           type="email"
-          onChange={(e) => {
-            setemailApl(e.target.value);
-          }}
+          value={userData.email}
           placeholder="Enter your email"
           name="email"
           required
@@ -74,9 +88,7 @@ const FormApply = (props) => {
         </label>
         <input
           type="tel"
-          onChange={(e) => {
-            setphoneApl(e.target.value);
-          }}
+          value={userData.phone}
           placeholder="Enter your phone number"
           name="phone"
         />
@@ -93,8 +105,8 @@ const FormApply = (props) => {
           name="text_motivation"
         />
         <button
-          className="button_form" 
-          onClick={(e) => goApply()}
+          className="button_form"
+          onClick={(e) => goApplyUserCo()}
           id="submit_apply"
           value="apply"
         >

@@ -46,9 +46,38 @@ exports.deleteAll = (req, res) => {
 //     );
 //   });
 // };
+//createAU
+
+//créer un applied et le sauvegarder
+exports.createAU = (req, res) => {
+  const candidateId = req.body.id;
+  console.log("first");
+  Candidate.findById(candidateId, (err, res) => {});
+  console.log("second");
+  //if (res) {
+  const applied = new Applied({
+    advertisement_id: req.body.idAdv,
+    // candidate_id: res.id,
+    candidate_id: candidateId,
+    motivation_people: req.body.motivation_people,
+  });
+
+  Applied.createA(applied, (err, res) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Candidate.",
+      });
+  });
+
+  //} else {
+  // console.log(err);
+  // }
+};
 
 //créer un applied et le sauvegarder
 exports.createA = (req, res) => {
+  console.log(req);
   if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!",
@@ -68,17 +97,17 @@ exports.createA = (req, res) => {
       const applied = new Applied({
         advertisement_id: req.body.idAdv,
         candidate_id: res.id,
-        //candidate_id: req.body.candidate_id,
+        // candidate_id: req.body.candidate_id,
         motivation_people: req.body.motivation_people,
       });
 
       Applied.createA(applied, (err, res) => {
-        // if (err)
-        //   res.status(500).send({
-        //     message:
-        //       err.message || "Some error occurred while creating the Candidate.",
-        //   });
-        // else res.send({ message: "Successfully registered" });
+        if (err)
+          res.status(500).send({
+            message:
+              err.message ||
+              "Some error occurred while creating the Candidate.",
+          });
       });
     } else {
       console.log(err);

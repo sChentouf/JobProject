@@ -1,6 +1,5 @@
 const sql = require("./db.js");
-const candidate = require("../controllers/candidates.controllers");
-const applied = require("../controllers/applied.controllers");
+
 // constructeur
 const Applied = function (applied) {
   this.advertisement_id = applied.advertisement_id;
@@ -33,6 +32,18 @@ Applied.removeAll = (result) => {
     result(null, res);
   });
 };
+// Applied.createAU = (newApplied, result) => {
+//   sql.query("INSERT INTO applied SET ?", newApplied, (err, res) => {
+//     if (err) {
+//       console.log("error: ", err);
+//       result(err, null);
+//       return;
+//     }
+
+//     console.log("created applied: ", { id: res.insertId, ...newApplied });
+//     result(null, { message: "yesss" });
+//   });
+// };
 
 Applied.createA = (newApplied, result) => {
   sql.query("INSERT INTO applied SET ?", newApplied, (err, res) => {

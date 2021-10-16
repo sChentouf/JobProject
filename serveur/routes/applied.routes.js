@@ -6,9 +6,12 @@ module.exports = (app) => {
 
   // les supprimer tous
   app.delete("/applied", (req, res) => applied.deleteAll(req, res));
-  //Créer candiature
 
+  //Créer candiature non user
   app.post("/applied", (req, res) => applied.createA(req, res));
+
+  //Créer candiature user
+  app.post("/applieduser", (req, res) => applied.createAU(req, res));
 
   //Select une candidature par l'id
   app.get("/applied/:appliedId", (req, res) => applied.findOne(req, res));
