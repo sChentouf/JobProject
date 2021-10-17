@@ -76,3 +76,6 @@ input[type=tel],
     border: 1px solid #0B005D;
     transition: 0.4s;
 }
+.hidden{
+    visibility: hidden;
+}

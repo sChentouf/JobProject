@@ -12,8 +12,6 @@ const FormApply = (props) => {
     phone: "",
     motivation_people: "",
   });
-  const [motivationApl, setMotivationApl] = useState("");
-  const [idAdv] = useState(props.idAdv);
 
   useEffect(() => {
     const localtoken = localStorage.getItem("myJWT");
@@ -27,21 +25,24 @@ const FormApply = (props) => {
         }
       });
   }, [props]);
-  console.log("response");
+
+  const [motivationApl, setMotivationApl] = useState("");
+  const [idAdv] = useState(props.idAdv);
+  // const [candidateId] = useState(props.candidateId);
 
   const goApplyUserCo = (props) => {
     const localtoken = localStorage.getItem("myJWT");
     const decoded = jwt.verify(localtoken, "secret");
     console.log("le miiiiiiiiiiiiiien " + decoded.id);
     axios
-      .post("http://localhost:8082/applieduser" + decoded.id, {
-        // name: userData.name,
-        // first_name: userData.first_name,
-        // email: userData.email,
-        // phone: userData.phone,
+      .post("http://localhost:8082/applieduser", {
+        name: userData.name,
+        first_name: userData.first_name,
+        email: userData.email,
+        phone: userData.phone,
         motivation_people: motivationApl,
         idAdv: idAdv,
-        id: decoded.id,
+        candidate_id: userData.id,
       })
       .then((response) => {
         console.log(response);
@@ -56,6 +57,13 @@ const FormApply = (props) => {
         <label>
           <b>Name</b>
         </label>
+        <input
+          className="hidden"
+          type="numeri"
+          value={userData.id}
+          placeholder="Enter your id"
+          name="candidate_id"
+        />
         <input
           type="text"
           value={userData.name}
@@ -110,7 +118,7 @@ const FormApply = (props) => {
           id="submit_apply"
           value="apply"
         >
-          Post Apply
+          Apply
         </button>
       </form>
     </div>

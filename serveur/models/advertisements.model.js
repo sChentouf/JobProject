@@ -7,6 +7,7 @@ const Advertisements = function (advertisements) {
   this.date = advertisements.date;
   this.contrat_type = advertisements.contrat_type;
   this.description = advertisements.description;
+  this.compagnie_id = advertisements.compagnie_id;
 };
 
 Advertisements.getAll = (result) => {
@@ -162,4 +163,25 @@ Advertisements.findByTitle = (credentials, result) => {
     }
   );
 };
+
+Advertisements.findByCID = (credentials, result) => {
+  sql.query(
+    `SELECT * FROM advertisements WHERE compagnie_id = '${credentials.compagnie_id}'`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        console.log("found advertisements: ", res);
+        result(null, res);
+        return;
+      }
+      // not found advertisements with the title
+      result({ kind: "not_found" }, null);
+    }
+  );
+};
+
 module.exports = Advertisements;

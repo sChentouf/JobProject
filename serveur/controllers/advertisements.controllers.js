@@ -44,6 +44,7 @@ exports.create = (req, res) => {
     date: req.body.date,
     contrat_type: req.body.contrat_type,
     description: req.body.description,
+    compagnie_id: req.body.compagnie_id,
   });
 
   // Save advertisements in the database
@@ -90,6 +91,28 @@ exports.findOneTitle = async (req, res) => {
         } else {
           res.send(200)({
             message: `success with title `,
+            data,
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
+
+exports.findOneCompagny = async (req, res) => {
+  Advertisements.findByCID(
+    {
+      compagnie_id: req.body.decoded.id,
+    },
+    async (err, data) => {
+      if (err) {
+        if (!data || !data.length) {
+          res.status(404).send({
+            message: `Not found annonces`,
+          });
+        } else {
+          res.send(200)({
+            message: `success with this `,
             data,
           });
         }
@@ -153,7 +176,7 @@ exports.delete = (req, res) => {
                 req.params.advertisementsId,
             });
           }
-        } else res.send({ message: `Customer was deleted successfully!` });
+        }
       });
     } else {
       console.log(err);

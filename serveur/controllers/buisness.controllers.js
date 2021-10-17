@@ -64,11 +64,6 @@ exports.create = async (req, res) => {
           err.message || "Some error occurred while creating the Buisness.",
       });
     else res.send({ message: "Successfully registered" });
-    const token = jwt.sign({ id: firstBuisness.id }, "secret");
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-    });
   });
 };
 // Find a single Customer with a customerId

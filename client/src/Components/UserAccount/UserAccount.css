@@ -20,19 +20,20 @@
 }
 
 #content_user_account button {
-	background-color: transparent;
-	color: #0B005D;
-	padding: 0.5vh;
-	margin: 0.2vh;
-	border: solid 1px #0B005D;
-	cursor: pointer;
-	border-radius: 3px;
-	margin-left: 7vh;
+    color: #fff;
+    /* padding: 0.5vh; */
+    margin: 0.2vh;
+    border: solid 1px #0B005D;
+    cursor: pointer;
+    border-radius: 3px;
+    /* margin-left: 7vh; */
+    background-color: #0B005D;
 }
 
 #content_user_account button:hover{
-    color: #391FFF;
-    border: 1px solid #391FFF;
+    background-color: transparent;
+    color: #0B005D;
+    border: 1px solid #0B005D;
 	transition: 0.4s;
 }
 

@@ -8,7 +8,7 @@ module.exports = (app) => {
   // les supprimer tous
   app.delete("/buisness", (req, res) => buisness.deleteAll(req, res));
   //Créer registration
-  app.post("/register_buis/", (req, res) => buisness.create(req, res));
+  app.post("/buisness/", (req, res) => buisness.create(req, res));
   //login
   app.post("/buisness/login/", (req, res) => buisness.loginB(req, res));
   //Select un candidat par l'id

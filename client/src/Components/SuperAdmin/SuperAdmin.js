@@ -86,8 +86,10 @@ const SuperAdmin = (props) => {
                     <button onClick={e => getDataUser()}>get candidate</button>
                     <button onClick={() => setformCreateUser(!formCreateUser)}>create candidate</button>
                     {formCreateUser && <FormRegistrationUser />}
-                    {dataUser
+                    {tabUser &&
+                    <div>{dataUser
                      && dataUser.map((user) => <ItemUser user={user} />)}
+                     </div>}
                 </div>
                 {/* BUISNESS  */}
                 <div>
@@ -95,8 +97,10 @@ const SuperAdmin = (props) => {
                     <button onClick={e => getDataBuisness()}>get buisness</button>
                     <button onClick={() => setformCreateBuisness(!formCreateBuisness)}>create buisness</button>
                     {formCreateBuisness && <FormRegistrationBuisness />}
-                    {dataBuis
+                    {tabBuis &&
+                    <div>{dataBuis
                      && dataBuis.map((buisness) => <ItemBuisness buisness={buisness} />)}
+                     </div>}
                 </div>
                 {/* ADVERTISMENT  */}
                 <div>
@@ -104,8 +108,10 @@ const SuperAdmin = (props) => {
                     <button onClick={e => getDataAdvert()}>get Advertisements</button>
                     <button onClick={() => setformCreateAdvert(!formCreateAdvert)}>create advertisement</button>
                     {formCreateAdvert && <CreateAnnoucement />}
-                    {dataAdvert
+                    {tabAdvert &&
+                    <div>{dataAdvert
                      && dataAdvert.map((advertisement) => <ItemAdvertisments advertisement={advertisement} />)}
+                     </div>}
                 </div>
                 {/* APPLIED  */}
                 <div>
@@ -113,8 +119,10 @@ const SuperAdmin = (props) => {
                     <button onClick={e => getDataApplied()}>get Applied</button>
                     <button onClick={() => setformCreateApplied(!formCreateApplied)}>create Applied</button>
                     {formCreateApplied && <FormApply />}
-                    {dataApplied
+                    {tabApplied &&
+                    <div>{dataApplied
                      && dataApplied.map((applied) => <ItemApplied applied={applied} />)}
+                     </div>}
                  </div>
                     
                 </div>

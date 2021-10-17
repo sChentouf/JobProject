@@ -16,7 +16,7 @@ console.log(dataApplied)
       }
 
       const UpdateInfosapplied = (dataApplied) => {
-          axios.post("http://localhost:8082/applied/" + dataApplied.id, {
+          axios.post("http://localhost:8082/applied", {
               motivation_people: dataApplied.motivation_people,
               advertisement_id: dataApplied.advertisement_id,
               candidate_id: dataApplied.candidate_id,

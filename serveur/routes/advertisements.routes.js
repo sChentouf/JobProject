@@ -21,14 +21,9 @@ module.exports = (app) => {
     advertisements.findOneTitle(req, res)
   );
 
-  //Select un advertisment par title
-  app.get("/advertisement", (req, res) =>
-    advertisements.findOneTitle(req, res)
-  );
-
-  //Select un advertisment par title
-  app.get("/advertisement", (req, res) =>
-    advertisements.findOneTitle(req, res)
+  //Selectionner par id compagnie
+  app.get("/advertisementt/:id", (req, res) =>
+    advertisements.findOneCompagny(req, res)
   );
 
   // Modifier un candidat with candidatId

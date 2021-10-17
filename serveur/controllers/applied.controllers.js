@@ -50,15 +50,17 @@ exports.deleteAll = (req, res) => {
 
 //créer un applied et le sauvegarder
 exports.createAU = (req, res) => {
-  const candidateId = req.body.id;
+
+  const candidateId = res.id;
   console.log("first");
   Candidate.findById(candidateId, (err, res) => {});
   console.log("second");
+
   //if (res) {
   const applied = new Applied({
     advertisement_id: req.body.idAdv,
     // candidate_id: res.id,
-    candidate_id: candidateId,
+    candidate_id: req.body.candidate_id,
     motivation_people: req.body.motivation_people,
   });
 
@@ -66,7 +68,7 @@ exports.createAU = (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Candidate.",
+          err.message || "Some error occurred while creating the Applied.",
       });
   });
 

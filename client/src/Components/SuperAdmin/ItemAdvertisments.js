@@ -38,10 +38,7 @@ const ItemAdvertisments = (props) => {
   // SUPPRIMER advertisement
   const Delete = (dataAdvertisement) => {
     axios
-      .delete(
-        "http://localhost:8082/advertisements/:advertisementsId" +
-          dataAdvertisement.id
-      )
+      .delete("http://localhost:8082/advertisements/" + dataAdvertisement.id)
       .then((response) => {
         console.log(response);
       });

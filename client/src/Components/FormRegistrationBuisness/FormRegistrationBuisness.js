@@ -26,7 +26,7 @@ const FormRegistrationBuisness = () => {
       alert('warning email invalid');
     }
     else
-      axios.post("http://localhost:8082/register_buis", {
+      axios.post("http://localhost:8082/buisness/", {
         name: BNameReg,
         activities: BActivitieReg,
         contact_name: bNameContatcReg,

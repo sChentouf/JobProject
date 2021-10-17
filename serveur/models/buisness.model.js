@@ -73,11 +73,11 @@ Buisness.remove = (id, result) => {
   });
 };
 
-Buisness.updateById = (buisnessId,credentials, result) => {
-  console.log(credentials)
+Buisness.updateById = (buisnessId, credentials, result) => {
+  console.log(credentials);
   sql.query(
     `UPDATE buisness SET ? WHERE id= '${buisnessId}'`,
-     credentials,
+    credentials,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -91,7 +91,7 @@ Buisness.updateById = (buisnessId,credentials, result) => {
         return;
       }
 
-      console.log("updated buisness: ", { credentials});
+      console.log("updated buisness: ", { credentials });
       result(null, credentials);
     }
   );
@@ -106,7 +106,6 @@ Buisness.findById = (buisnessId, result) => {
     }
 
     if (res.length) {
-      console.log("found buisness: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -117,7 +116,6 @@ Buisness.findById = (buisnessId, result) => {
 };
 
 Buisness.loginB = (credentials, result) => {
-  console.log(credentials);
   sql.query(
     `SELECT * FROM buisness WHERE email = '${credentials.email}'`,
     (err, res) => {
