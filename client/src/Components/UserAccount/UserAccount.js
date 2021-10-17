@@ -67,7 +67,6 @@ const UserAccount = (props) => {
       const decoded = jwt.verify(localtoken, "secret");
       axios
         .post("http://localhost:8082/candidate/" + decoded.id, {
-          // if(props.match.params == undefined)
 
           name: userData.name,
           first_name: userData.first_name,
@@ -230,7 +229,7 @@ const UserAccount = (props) => {
         )}
 
         <div id="candidacy_user">
-          <h3>candidacy user</h3>
+          <h3>Candidacy user</h3>
           <UserApplied />
         </div>
       </div>

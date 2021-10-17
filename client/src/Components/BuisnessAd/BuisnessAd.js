@@ -16,13 +16,19 @@ const BuisnessAd = () => {
   /* pour afficher le contenu de l'annonce */
   const [value, setValue] = useState();
 
+
+
+  const [compagnie, setcompagnie] = useState("");
+
   /* pour afficher le contenu de l'annonce */
   useEffect(() => {
     if (!value) {
       const localtoken = localStorage.getItem("myJWT");
       const decoded = jwt.verify(localtoken, "secret");
       axios
-        .get("http://localhost:8082/advertisementt/" + decoded.id)
+        .get("http://localhost:8082/advertisementt/" + decoded.id,{
+          // compagnie={el.compagnie_id}
+        })
         .then((response) => {
           // console.log(response.data)
           setValue(
@@ -33,7 +39,7 @@ const BuisnessAd = () => {
                 short={el.short_description}
                 date={el.date}
                 description={el.description}
-                //compagnie={el.compagnie_id}
+                compagnie={el.compagnie_id}
                 contrat={el.contrat_type}
               />
             ))

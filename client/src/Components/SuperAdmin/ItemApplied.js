@@ -12,11 +12,15 @@ console.log(dataApplied)
 
         // Modifier LES VALEURS
     const handleChangeApp = (e,id) => {
-      setdataApplied({...dataApplied, [e.target.name]: e.target.value})
+      setdataApplied({
+        ...dataApplied,
+         [e.target.name]: e.target.value,
+        });
       }
 
       const UpdateInfosapplied = (dataApplied) => {
-          axios.post("http://localhost:8082/applied", {
+          axios
+          .post("http://localhost:8082/applied/" + dataApplied.id, {
               motivation_people: dataApplied.motivation_people,
               advertisement_id: dataApplied.advertisement_id,
               candidate_id: dataApplied.candidate_id,

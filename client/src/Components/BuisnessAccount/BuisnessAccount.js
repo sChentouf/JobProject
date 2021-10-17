@@ -7,7 +7,13 @@ import axios from "axios";
 import CreateAnnoucement from "../CreateAnnoucement/CreateAnnoucement";
 //import BuisnessAnnoucement from "../BuisnessAnnoucement/BuisnessAnnoucement";
 import BuisnessAd from "../BuisnessAd/BuisnessAd";
+
+
+
 const BuisnessAccount = (props) => {
+
+
+  
   const Delog = () => {
     localStorage.removeItem("myJWT");
     window.location.href = `/`;

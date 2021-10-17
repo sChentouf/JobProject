@@ -1,18 +1,19 @@
 const Applied = require("../models/applied.model");
 const Candidate = require("../models/candidate.model");
+const Advertisements = require("../models/advertisements.model");
 
-//selectionner tout les candidats de la bdd
-exports.findAll = (req, res) => {
-  console.log("hgghg");
-  Applied.getAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving customers.",
-      });
-    else res.send(data);
-  });
-};
+// //selectionner tout les candidats de la bdd
+// exports.findAll = (req, res) => {
+//   console.log("hgghg");
+//   Applied.getAll((err, data) => {
+//     if (err)
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while retrieving customers.",
+//       });
+//     else res.send(data);
+//   });
+// };
 
 //supprimer tout les candidats de la bdd
 exports.deleteAll = (req, res) => {
@@ -50,7 +51,6 @@ exports.deleteAll = (req, res) => {
 
 //créer un applied et le sauvegarder
 exports.createAU = (req, res) => {
-
   const candidateId = res.id;
   console.log("first");
   Candidate.findById(candidateId, (err, res) => {});
@@ -196,6 +196,55 @@ exports.findOne = (req, res) => {
       }
     } else res.send(data);
   });
+};
+
+//Update a Customer identified by the customerId in the request
+exports.update = async (req, res) => {
+  console.log(req.body);
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  Applied.updateById(req.params.appliedId, req.body, (err, data) => {
+    console.log(req.body);
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Customer3 with id ${req.body.appliedId}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Error updating Customer with id " + req.body.appliedId,
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+exports.findOneCandidate = async (req, res) => {
+  const candidate_id = req.params.candidateId;
+  Applied.findBycandidate(
+    {
+      candidate_id: req.params.candidateId,
+    },
+    async (err, data) => {
+      if (err) {
+        if (!data || !data.length) {
+          res.status(404).send({
+            message: err,
+          });
+        } else {
+          res.send(200)({
+            message: `success with this `,
+            data,
+          });
+        }
+      } else res.send(data);
+    }
+  );
 };
 
 exports.delete = (req, res) => {

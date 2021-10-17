@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ".././FormRegistrationUser/FormRegistrationUser.css";
 import axios from "axios";
 import jwt from "jsonwebtoken";
+import SuperAdmin from "../SuperAdmin/SuperAdmin";
 
 const FormLogin = () => {
   const [emailLog, setEmailLog] = useState("");
@@ -10,7 +11,7 @@ const FormLogin = () => {
 
   const req = () => {
     axios
-      .post("http://localhost:8082/login", {
+      .post("http://localhost:8082/admin/login", {
         email: emailLog,
         password: passwordLog,
       })
@@ -18,8 +19,8 @@ const FormLogin = () => {
         if (response.data) {
           if (response.data.message === "success") {
             try {
-              const decoded = jwt.verify(response.data.token, "secret");
-              window.location.href = `../AdminAccount/${decoded.id}`;
+              // const decoded = jwt.verify(response.data.token, "secret");
+              window.location.href = `../SuperAdmin/`;
             } catch (error) {
               console.log(error);
             }

@@ -8,6 +8,7 @@ import UserAccount from "../UserAccount/UserAccount";
 import SuperAdmin from "../SuperAdmin/SuperAdmin";
 import logo from "../../images/logo_small_blue.png";
 import PageLoginBuisness from "../PageLoginBuisness/PageLoginBuisness";
+import PageLoginAdmin from "../PageLoginAdmin/PageLoginAdmin";
 
 const Header = () => {
   return (
@@ -56,13 +57,13 @@ const Header = () => {
         {/* Lien page super admin*/}
         <Link
           to={{
-            pathname: "/SuperAdmin",
+            pathname: "/PageLoginAdmin",
             search: "?sort=name",
             hash: "#the-hash",
             state: { fromDashboard: true },
           }}
         >
-          <div to="/SuperAdmin" Components={SuperAdmin} />
+          <div to="/PageLoginAdmin" Components={PageLoginAdmin} />
           <button>Super Admin</button>
         </Link>
       </ul>

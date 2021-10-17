@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ButtonLearnMore from "../ButtonLearnMore/ButtonLearnMore";
 import "../Announcement/Annoucement.css";
+import jwt from "jsonwebtoken";
 
 const UserApplied = () => {
   /* pour afficher la pop */
@@ -18,25 +19,28 @@ const UserApplied = () => {
   /* pour afficher le contenu de l'annonce */
   useEffect(() => {
     if (!value) {
-      const promise = axios.get("http://localhost:8082/advertisements/", {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
-      promise.then((response) => {
-        // console.log(response.data)
-        setValue(
-          response.data.map((el) => (
-            <Render
-              id={el.id}
-              title={el.title}
-              short={el.short_description}
-              date={el.date}
-              description={el.description}
-              compagnie={el.compagnie_id}
-              contrat={el.contrat_type}
-            />
-          ))
-        );
-      });
+      const localtoken = localStorage.getItem("myJWT");
+      const decoded = jwt.verify(localtoken, "secret");
+      axios
+        .get("http://localhost:8082/advertisementt/" + decoded.id,{
+          // compagnie={el.compagnie_id}
+        })
+        .then((response) => {
+          // console.log(response.data)
+          setValue(
+            response.data.map((el) => (
+              <Render
+                id={el.id}
+                title={el.title}
+                short={el.short_description}
+                date={el.date}
+                description={el.description}
+                compagnie={el.compagnie_id}
+                contrat={el.contrat_type}
+              />
+            ))
+          );
+        });
     }
   });
 

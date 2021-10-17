@@ -30,6 +30,7 @@ require("./routes/candidate.routes")(app);
 require("./routes/buisness.routes")(app);
 require("./routes/advertisements.routes")(app);
 require("./routes/applied.routes")(app);
+require("./routes/admin.routes")(app);
 
 //tests
 //app.get("/", (req, res) => {

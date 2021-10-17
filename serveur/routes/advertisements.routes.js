@@ -17,14 +17,15 @@ module.exports = (app) => {
   app.post("/advertisements", (req, res) => advertisements.create(req, res));
 
   //Select un advertisment par title
-  app.get("/advertisement", (req, res) =>
+  app.get("/advertisement/:nameJob", (req, res) =>
     advertisements.findOneTitle(req, res)
   );
 
   //Selectionner par id compagnie
-  app.get("/advertisementt/:id", (req, res) =>
+  app.get("/advertisementt/:compagnieId", cors(), (req, res) =>
     advertisements.findOneCompagny(req, res)
   );
+  
 
   // Modifier un candidat with candidatId
   app.post("/advertisements/:advertisementsId", (req, res) =>

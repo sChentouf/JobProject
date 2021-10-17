@@ -146,7 +146,7 @@ Advertisements.findById = (advertisementsId, result) => {
 
 Advertisements.findByTitle = (credentials, result) => {
   sql.query(
-    `SELECT * FROM advertisements WHERE title = '${credentials.title}'`,
+    `SELECT * FROM advertisements WHERE title = '${credentials.nameJob}'`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);

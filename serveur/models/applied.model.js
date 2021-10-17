@@ -99,25 +99,26 @@ Applied.removead = (advertisements_id, result) => {
   );
 };
 
-Applied.updateById = (id, candidate, result) => {
+Applied.updateById = (appliedId, credentials, result) => {
+  console.log(credentials);
   sql.query(
-    "UPDATE applied SET email = ?, WHERE id = ?",
-    [applied.email, id],
+    `UPDATE applied SET ? WHERE id= '${appliedId}'`,
+    credentials,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err);
         return;
       }
 
       if (res.affectedRows == 0) {
-        // not found candidate with the id
+        // not found buisness with the id
         result({ kind: "not_found" }, null);
         return;
       }
 
-      console.log("updated applied: ", { id: id, ...applied });
-      result(null, { id: id, ...applied });
+      console.log("updated advertisements ", { credentials });
+      result(null, credentials);
     }
   );
 };
@@ -141,4 +142,39 @@ Applied.findById = (appliedId, result) => {
   });
 };
 
+Applied.findBycandidate = (credentials, result) => {
+  sql.query(
+    `SELECT * FROM advertisements INNER JOIN applied ON applied.candidate_id = ${credentials.candidate_id}
+`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res) {
+        // let tab = [];
+        // let resultat = [];
+        // res.map((re) => {
+        //   tab.push(re.advertisement_id);
+        // });
+        // for (i = 0; i < tab.length; i++) {
+        //   let temp = sql.query(
+        //     `SELECT * FROM advertisements WHERE id = ${tab[i]}`
+        //   );
+        //   // resultat.push(temp);
+        // }
+        console.log("found advertisements: ", res);
+        result(null, res);
+        return;
+      }
+      // not found advertisements with the title
+      result({ kind: "not_found" }, null);
+    }
+  );
+};
+// Applied.findByCandidate = async (candidate_id) => {
+//   const applies = sql.query(`SELECT * FROM applied WHERE candidate_id = 51`);
+//   return applies[0];
+// };
 module.exports = Applied;

@@ -1,54 +1,54 @@
 const sql = require("./db.js");
 
 // constructeur
-const Super = function(super) {
+const Admin = function(admin) {
   
-  this.email = super.email;
-  this.password = super.password;
-  this.role = super.role;
+  this.email = admin.email;
+  this.password = admin.password;
+  this.role = admin.role;
 };
-Super.getAll = (result) => {
-  sql.query("SELECT * FROM super", (err, res) => {
+Admin.getAll = (result) => {
+  sql.query("SELECT * FROM admin", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("super: ", res);
+    console.log("admin: ", res);
     result(null, res);
   });
 };
 
-Super.removeAll = (result) => {
-  sql.query("DELETE FROM super", (err, res) => {
+Admin.removeAll = (result) => {
+  sql.query("DELETE FROM admin", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("deleted ${res.affectedRows} super");
+    console.log("deleted ${res.affectedRows} admin");
     result(null, res);
   });
 };
 
-Super.create = (newSuper
+Admin.create = (newAdmin
     , result) => {
-  sql.query("INSERT INTO super SET ?", newSuper, (err, res) => {
+  sql.query("INSERT INTO admin SET ?", newAdmin, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created candidate: ", { id: res.insertId, ...newSuper });
+    console.log("created admin: ", { id: res.insertId, ...newAdmin });
     result(null, { id: res.insertId, ...newCandidate });
   });
 };
 
-Super.remove = (id, result) => {
-  sql.query("DELETE FROM super WHERE id = ?", id, (err, res) => {
+Admin.remove = (id, result) => {
+  sql.query("DELETE FROM admin WHERE id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -56,20 +56,20 @@ Super.remove = (id, result) => {
     }
 
     if (res.affectedRows == 0) {
-      // not found candidate with the id
+      // not found admin with the id
       result({ kind: "not_found" }, null);
       return;
     }
 
-    console.log("deleted super with id: ", id);
+    console.log("deleted admin with id: ", id);
     result(null, res);
   });
 };
 
-Super.updateById = (id, candidate, result) => {
+Admin.updateById = (id, admin, result) => {
   sql.query(
-    "UPDATE super SET email = ?, WHERE id = ?",
-    [super.email, id],
+    "UPDATE admin SET email = ?, WHERE id = ?",
+    [admin.email, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -78,19 +78,19 @@ Super.updateById = (id, candidate, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found candidate with the id
+        // not found admin with the id
         result({ kind: "not_found" }, null);
         return;
       }
 
-      console.log("updated super: ", { id: id, ...super });
-      result(null, { id: id, ...super });
+      console.log("updated admin: ", { id: id, ...admin });
+      result(null, { id: id, ...admin });
     }
   );
 };
 
-Super.findById = (superId, result) => {
-  sql.query(`SELECT * FROM super WHERE id = ${superId}`, (err, res) => {
+Admin.findById = (adminId, result) => {
+  sql.query(`SELECT * FROM admin WHERE id = ${adminId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -98,7 +98,7 @@ Super.findById = (superId, result) => {
     }
 
     if (res.length) {
-      console.log("found super: ", res[0]);
+      console.log("found admin: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -107,10 +107,10 @@ Super.findById = (superId, result) => {
     result({ kind: "not_found" }, null);
   });
 };
-super.login = (credentials, result) => {
+Admin.login = (credentials, result) => {
   console.log(credentials);
   sql.query(
-    `SELECT * FROM super WHERE email = '${credentials.email}'`,
+    `SELECT * FROM admin WHERE email = '${credentials.email}'`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -118,9 +118,9 @@ super.login = (credentials, result) => {
         return;
       }
 
-      console.log("super: ", res);
+      console.log("admin: ", res);
       result(null, res);
     }
   );
 };
-module.exports = Super;
+module.exports = Admin;

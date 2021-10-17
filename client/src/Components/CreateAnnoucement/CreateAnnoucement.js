@@ -15,18 +15,18 @@ const CreateAnnoucement = () => {
     name: "",
   });
 
-  useEffect(() => {
-    const localtoken = localStorage.getItem("myJWT");
-    const decoded = jwt.verify(localtoken, "secret");
-    axios
-      .get("http://localhost:8082/buisness/" + decoded.id)
-      .then((response) => {
-        console.log(response);
-        if (response.data) {
-          setUserData(response.data);
-        }
-      });
-  });
+  // useEffect(() => {
+  //   // const localtoken = localStorage.getItem("myJWT");
+  //   // const decoded = jwt.verify(localtoken, "secret");
+  //   axios
+  //     .get("http://localhost:8082/buisness/" + userData.id)
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (response.data) {
+  //         setUserData(response.data);
+  //       }
+  //     });
+  // });
 
   const createAnnouc = () => {
     axios
@@ -54,10 +54,10 @@ const CreateAnnoucement = () => {
           placeholder="Enter your id"
           name="candidate_id"
         />
-        <label>
+        {/* <label>
           <b>Entreprise</b>
         </label>
-        <input type="text" value={userData.name} name="title" />
+        <input type="text" value={userData.name} name="title" /> */}
 
         <label>
           <b>Title</b>

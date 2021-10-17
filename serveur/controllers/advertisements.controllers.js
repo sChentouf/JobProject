@@ -80,13 +80,13 @@ exports.findOne = (req, res) => {
 exports.findOneTitle = async (req, res) => {
   Advertisements.findByTitle(
     {
-      title: req.body.title,
+      title: req.params.nameJob,
     },
     async (err, data) => {
       if (err) {
         if (!data || !data.length) {
           res.status(404).send({
-            message: `Not found Customer with title ${req.body.title}`,
+            message: `Not found Customer withhhhhhhhh title ${req.params.title}`,
           });
         } else {
           res.send(200)({
@@ -102,13 +102,14 @@ exports.findOneTitle = async (req, res) => {
 exports.findOneCompagny = async (req, res) => {
   Advertisements.findByCID(
     {
-      compagnie_id: req.body.decoded.id,
+      compagnie_id: req.params.compagnieId,    
     },
     async (err, data) => {
       if (err) {
+        
         if (!data || !data.length) {
           res.status(404).send({
-            message: `Not found annonces`,
+            message: `Not found annonces heheeh`,
           });
         } else {
           res.send(200)({
@@ -154,32 +155,42 @@ exports.update = async (req, res) => {
 
 // Delete a Customer with the specified customerId in the request
 exports.delete = (req, res) => {
-  if (!req.body) {
-    res.status(400).send({
-      message: "Content can not be empty!",
-    });
-  }
-  const advertisementsId = req.body.id;
-  console.log("lalalal" + advertisementsId);
-  Applied.removead(advertisementsId, (err, res) => {
-    if (res) {
-      Advertisements.remove(advertisementsId, (err, data) => {
-        if (err) {
-          if (err.kind === "not_found") {
-            res.status(404).send({
-              message: `Not found Customer with id ${advertisementsId}.`,
-            });
-          } else {
-            res.status(500).send({
-              message:
-                "Could not delete Customer with id " +
-                req.params.advertisementsId,
-            });
-          }
-        }
-      });
-    } else {
-      console.log(err);
-    }
+
+  Advertisements.remove(req.params.advertisementsId, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Customer with id ${req.params.advertisementsId}.`,
+        });
+      } else {
+        res.status(500).send({
+          message:
+            "Could not delete Customer with id " + req.params.advertisementsId,
+        });
+      }
+    } else res.send({ message: `Customer was deleted successfully!` });
   });
-};
+
+  // if (!req.body) {
+  //   res.status(400).send({
+  //     message: "Content can not be empty!",
+  //   });
+  // }
+  // //const advertisementsId = req.body.dataid;
+  // //console.log("lalalal" + advertisementsId);
+  // const advertisementsId = req.body.dataAdvertisement.id;
+  // Advertisements.remove(advertisementsId, (err, data) => {
+  //   if (err) {
+  //     if (err.kind === "not_found") {
+  //       res.status(404).send({
+  //         message: `Not found Customer with id ${advertisementsId}.`,
+  //       });
+  //     } else {
+  //       res.status(500).send({
+  //         message:
+  //           "Could not delete Customer with id " + req.params.advertisementsId,
+  //       });
+  //     }
+  //   }
+  // });
+}

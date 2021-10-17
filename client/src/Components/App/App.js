@@ -10,7 +10,7 @@ import PageLogin from "../PageLogin/PageLogin";
 import SuperAdmin from "../SuperAdmin/SuperAdmin";
 import PageLoginBuisness from "../PageLoginBuisness/PageLoginBuisness";
 import BuisnessAccount from "../BuisnessAccount/BuisnessAccount";
-//import PageLoginAdmin from "../PageLoginAdmin/PageLoginAdmin";
+import PageLoginAdmin from "../PageLoginAdmin/PageLoginAdmin";
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route path="/UserAccount/:id" exact component={UserAccount} />
         <Route path="/PageLoginBuisness" component={PageLoginBuisness} />
         <Route path="/BuisnessAccount/:id" exact component={BuisnessAccount} />
+        <Route path="/PageLoginAdmin/" component={PageLoginAdmin} />
         <Route path="/SuperAdmin/" component={SuperAdmin} />
         <Route
           path="/PageRegistrationUser"

@@ -1,32 +1,9 @@
-const Super = require("../models/admin.model");
+const Admin = require("../models/admin.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-//selectionner tout les candidats de la bdd
-exports.findAll = (req, res) => {
-  console.log("hgghg");
-  Super.getAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving customers.",
-      });
-    else res.send(data);
-  });
-};
 
-//supprimer tout les candidats de la bdd
-exports.deleteAll = (req, res) => {
-  Super.removeAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all buisness.",
-      });
-    else res.send({ message: `All buisness were deleted successfully!` });
-  });
-};
 
-//créer un buisness et le sauvegarder
+//créer un admin et le sauvegarder
 exports.create = async (req, res) => {
   // Validate request
   console.log(req);
@@ -39,44 +16,35 @@ exports.create = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
   console.log(hashedPassword);
-  // Create a Buisness
-  const buisness = new Buisness({
-    name: req.body.name,
-    activities: req.body.activities,
-    contact_name: req.body.contact_name,
-    number_employes: req.body.number_employes,
-    adress: req.body.adress,
-    postal_code: req.body.postal_code,
-    city: req.body.city,
+  // Create a Admin
+  const admin = new Admin({
     email: req.body.email,
-    phone: req.body.phone,
-    siret: req.body.siret,
     password: hashedPassword,
   });
 
-  console.log(buisness);
+  console.log(admin);
 
-  // Save buisness in the database
-  Buisness.create(buisness, (err, data) => {
+  // Save admin in the database
+  Admin.create(admin, (err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Buisness.",
+          err.message || "Some error occurred while creating the admin.",
       });
     else res.send({ message: "Successfully registered" });
   });
 };
 // Find a single Customer with a customerId
 exports.findOne = (req, res) => {
-  Buisness.findById(req.params.buisnessId, (err, data) => {
+  Admin.findById(req.params.adminId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Customer with id ${req.params.buisnessId}.`,
+          message: `Not found Customer with id ${req.params.adminId}.`,
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Customer with id " + req.params.buisnessId,
+          message: "Error retrieving Customer with id " + req.params.adminId,
         });
       }
     } else res.send(data);
@@ -84,25 +52,65 @@ exports.findOne = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  Buisness.remove(req.params.buisnessId, (err, data) => {
+  Admin.remove(req.params.adminId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Customer with id ${req.params.buisnessId}.`,
+          message: `Not found Customer with id ${req.params.adminId}.`,
         });
       } else {
         res.status(500).send({
-          message: "Could not delete Customer with id " + req.params.buisnessId,
+          message: "Could not delete Customer with id " + req.params.adminId,
         });
       }
     } else res.send({ message: `Customer was deleted successfully!` });
   });
 };
 
+// exports.login = async (req, res) => {
+//   Admin.login(
+//     {
+//       email: req.body.email,
+//     },
+//     async (err, data) => {
+//       console.log(data);
+//       if (!data || !data.length) {
+//         return res.status(400).send({
+//           message: "user not found",
+//         });
+//       }
+//       // const firstAdmin = data[0];
+//       // console.log(firstAdmin);
+//       // const isPasswordCorrect = await bcrypt.compare(
+//         // req.body.password,
+//         password = req.body.password
+//       // );
+
+//       console.log(password);
+//       Admin.comparepassword(req.body.password, (err, isMatch) => {
+//         if (isMatch)
+//         return res.Json;
+//       })
+  
+//       // const token = jwt.sign({ id: firstAdmin.id }, "secret");
+//       // res.cookie("jwt", token, {
+//       //   httpOnly: true,
+//       //   maxAge: 24 * 60 * 60 * 1000, // 1 day
+//       // });
+     
+//     }
+//   );
+// };
+
+
+
+
 exports.login = async (req, res) => {
-  Buisness.login(
+  console.log(req.body);
+  Admin.login(
     {
       email: req.body.email,
+      password: req.body.password,
     },
     async (err, data) => {
       console.log(data);
@@ -111,28 +119,19 @@ exports.login = async (req, res) => {
           message: "user not found",
         });
       }
-      const firstBuisness = data[0];
-      console.log(firstBuisness);
-      console.log(firstBuisness.password);
-      const isPasswordCorrect = await bcrypt.compare(
-        req.body.password,
-        firstBuisness.password
-      );
-
-      console.log(isPasswordCorrect);
-      if (!isPasswordCorrect) {
+      // const firstAdmin = data[0];
+      // const isPasswordCorrect = await bcrypt.compare(
+      //   req.body.password,
+      //   firstCandidate.password
+      //);
+      if (!req.body.password) {
         return res.status(400).send({
           message: "invalid credentials",
         });
       }
-      const token = jwt.sign({ id: firstBuisness.id }, "secret");
-      res.cookie("jwt", token, {
-        httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000, // 1 day
-      });
+
       res.send({
         message: "success",
-        token,
       });
     }
   );
